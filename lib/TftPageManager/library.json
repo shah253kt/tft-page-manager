@@ -1,0 +1,25 @@
+{
+    "name": "TFT Page Manager",
+    "version": "1.0.0",
+    "description": "An library to manage custom pages for TFT displays.",
+    "keywords": "tft, page manager, display",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/shah253kt/tft-page-manager"
+    },
+    "authors": [
+        {
+            "name": "Ahmad Shahril",
+            "url": "https://github.com/shah253kt",
+            "maintainer": true
+        }
+    ],
+    "dependencies": {
+        "moononournation/GFX Library for Arduino": "^1.4.7",
+        "SimpleStack": "https://github.com/shah253kt/SimpleStack/archive/refs/tags/1.1.2.zip"
+    },
+    "license": "MIT",
+    "homepage": "https://github.com/shah253kt/tft-page-manager",
+    "frameworks": "arduino",
+    "platforms": "atmelavr"
+}
