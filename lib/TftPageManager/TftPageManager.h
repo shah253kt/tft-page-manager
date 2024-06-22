@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SimpleStack.h"
+#include "LinkedList.h"
 #include "Page.h"
 
 class Arduino_GFX;
@@ -12,11 +12,11 @@ public:
     ~TftPageManager() = default;
 
     Page* currentPage() const;
-    bool goToPage(Page *page);
-    bool goToPrevPage();
-    void clear();
+    void goToPage(Page *page);
+    void goToPrevPage();
+    void goToFirstPage();
 
 private:
     Arduino_GFX *m_gfx;
-    SimpleStack<Page*> *m_navStack;
+    LinkedList<Page*> *m_navStack;
 };

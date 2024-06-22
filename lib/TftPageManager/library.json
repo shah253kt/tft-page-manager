@@ -16,7 +16,7 @@
     ],
     "dependencies": {
         "moononournation/GFX Library for Arduino": "^1.4.7",
-        "SimpleStack": "https://github.com/shah253kt/SimpleStack/archive/refs/tags/1.1.2.zip"
+        "ivanseidel/LinkedList": "0.0.0-alpha+sha.dac3874d28"
     },
     "license": "MIT",
     "homepage": "https://github.com/shah253kt/tft-page-manager",

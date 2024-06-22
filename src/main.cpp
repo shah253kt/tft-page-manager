@@ -6,6 +6,7 @@
 #include "TftPageManager.h"
 #include "pages/Page1.h"
 #include "pages/Page2.h"
+#include "pages/PageWithComponents.h"
 
 #define DISPLAY_ROTATION 1 // 0 = 0°, 1 = 90°, 2 = 180°, 3 = 270°
 
@@ -14,6 +15,7 @@ Arduino_GFX *gfx = new Arduino_ILI9486(bus, TftDisplay::RST, DISPLAY_ROTATION);
 TftPageManager pageManager(gfx);
 auto page1 = new Page1();
 auto page2 = new Page2();
+auto pageWithComponents = new PageWithComponents();
 
 void setup()
 {
@@ -34,6 +36,11 @@ void loop()
         case '2':
         {
             pageManager.goToPage(page2);
+            break;
+        }
+        case '3':
+        {
+            pageManager.goToPage(pageWithComponents);
             break;
         }
         }

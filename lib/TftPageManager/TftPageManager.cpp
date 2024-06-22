@@ -2,61 +2,54 @@
 
 #include "Arduino_GFX_Library.h"
 
-namespace
-{
-    constexpr auto DEFAULT_NAV_STACK_SIZE = 5;
-}
-
 TftPageManager::TftPageManager(Arduino_GFX *gfx)
     : m_gfx{gfx},
-      m_navStack{new SimpleStack<Page *>(DEFAULT_NAV_STACK_SIZE)}
+      m_navStack{new LinkedList<Page *>()}
 {
     m_gfx->begin();
 }
 
 Page *TftPageManager::currentPage() const
 {
-    Page *page;
-
-    if (m_navStack->peek(&page))
+    if (m_navStack->size() == 0)
     {
-        return page;
+        return nullptr;
     }
 
-    return nullptr;
+    return m_navStack->get(m_navStack->size() - 1);
 }
 
-bool TftPageManager::goToPage(Page *page)
+void TftPageManager::goToPage(Page *page)
 {
     page->render(m_gfx);
 
     if (currentPage() == page)
     {
-        return true;
+        return;
     }
 
-    return m_navStack->push(page);
+    m_navStack->add(page);
 }
 
-bool TftPageManager::goToPrevPage()
+void TftPageManager::goToPrevPage()
 {
-    Page *page;
-
-    if (!m_navStack->pop(&page))
+    if (m_navStack->size() <= 1)
     {
-        return false;
+        return;
     }
 
-    if (!m_navStack->peek(&page))
-    {
-        return false;
-    }
-
+    m_navStack->pop();
+    auto page = m_navStack->get(m_navStack->size() - 1);
     page->render(m_gfx);
-    return true;
 }
 
-void TftPageManager::clear()
+void TftPageManager::goToFirstPage()
 {
-    m_navStack->empty();
+    while (m_navStack->size() > 1)
+    {
+        m_navStack->pop();
+    }
+
+    auto page = m_navStack->get(0);
+    page->render(m_gfx);
 }
