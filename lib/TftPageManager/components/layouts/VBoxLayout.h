@@ -13,5 +13,7 @@ public:
     void addComponent(UiComponent *component);
 
     void draw(Arduino_GFX *gfx) override;
+
 private:
+    void updateSize(Arduino_GFX *gfx);
 };
