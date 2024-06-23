@@ -17,6 +17,7 @@ void VBoxLayout::draw(Arduino_GFX *gfx)
     updateSize(gfx);
     const auto rect = containerRect();
     auto containerHeight = 0;
+    auto maxChildWidth = 0;
 
     for (auto i = 0; i < children()->size(); i++)
     {
@@ -24,9 +25,12 @@ void VBoxLayout::draw(Arduino_GFX *gfx)
         child->setSize(rect.width.get(), child->rect()->height.get());
         child->setPosition(rect.x.get(), rect.y.get() + containerHeight);
         containerHeight += child->rect()->height.get();
+        maxChildWidth = max(maxChildWidth, child->rect()->width.get());
 
         child->draw(gfx);
     }
+
+    setSize(maxChildWidth, containerHeight);
 }
 
 void VBoxLayout::updateSize(Arduino_GFX *gfx)
